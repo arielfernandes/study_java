@@ -22,31 +22,80 @@ public class metodoInvoca {
 		}
 		return media;
 	}
-	public static float mediaAritimetica(float a) {
-		return a/3;
+	public static float calcularMediaAritimetica(float[] a) {
+		float x = 0;
+		for (int i = 0; i < a.length; i++) {
+			x += a[i];
+		}
+		return x / a.length;
 	}
-	public static float mediaHarmonica() {
-		System.out.println("entrou");
-		return 0;
+	public static float calcularMediaHarmonica(double[] notas) {
+		float aux = 0;
+		for(int i = 0; i < notas.length; i++) {
+			aux += 1/notas[i];
+		}
+		return notas.length / aux;
 	}
 	public static void resposta(float media) {
 		String resp = (media >= 6) ? "Aprovado" : "Reprovado";
 		System.out.printf("\n\nMédia: %.2f\nAluno: %s.\n\n", media, resp);
 	}
+	public static float getAritimetica() {
+		Scanner sc = new Scanner(System.in);
+
+		System.out.println("Informe o total de notas: ");
+		int total = sc.nextInt();
+		float[] notas = new float[total];
+		for (int i = 0; i < total; i++) {
+			System.out.println("Informe a " + (1+i) + "° nota: ");
+			notas[i] = sc.nextFloat();
+		}
+		float media = calcularMediaAritimetica(notas);
+		return media;
+	}
+	public static float getPonderada() {
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Informe o total de notas: ");
+		int total = sc.nextInt();
+		double[] notas = new double[total];
+		float[] peso = new float[total];
+		for (int i = 0; i < total; i++) {
+			System.out.println("Informe a " + (1+i) + "° nota: ");
+			notas[i] = sc.nextDouble();
+			System.out.println("Informe o peso da nota: ");
+			peso[i] = sc.nextFloat();
+		}
+		float media = calcularMediaPonderada(notas, peso);
+		return media;
+	}
+	public static float getHarmonica() { 
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Informe o total de notas: ");
+		int total = sc.nextInt();
+		double[] notas = new double[total];
+		for (int i = 0; i < total; i++) {
+			System.out.println("Informe a " + (i+1) + "° nota: ");
+			notas[i] = sc.nextDouble();
+		}
+		float media = calcularMediaHarmonica(notas);
+		return media;
+	}
 	public static void opcoes(String op){
+		Scanner sc = new Scanner(System.in);
+		float resp = 0, retorno = 0;
+		int total = 0;
 		switch (op) {
 			case "a":
-				float soma = somar(somar(8, 9), 9);
-				resposta(mediaAritimetica(soma));
+				retorno = getAritimetica();
+				resposta(retorno);
 				break;
 			case "p":
-				double[] notas = {1, 2, 1, 7.5};
-				float[] peso = {1, 2, 3, 4};
-				float resultado = calcularMediaPonderada(notas, peso);
-				resposta(resultado);
+				retorno = getPonderada();
+				resposta(retorno);
 				break;
 			case "h":
-				mediaHarmonica();
+				retorno = getHarmonica();
+				resposta(retorno);
 				break;
 			case "s":
 				System.out.println("Saiu!!");
@@ -79,7 +128,5 @@ public class metodoInvoca {
 		while(true) {
 			menu();
 		}
-
-
 	}
 }
