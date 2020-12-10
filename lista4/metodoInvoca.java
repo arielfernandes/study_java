@@ -37,11 +37,13 @@ public class metodoInvoca {
 		return notas.length / aux;
 	}
 	public static void resposta(float media) {
+		System.out.print("\033\143");
 		String resp = (media >= 6) ? "Aprovado" : "Reprovado";
 		System.out.printf("\n\nMédia: %.2f\nAluno: %s.\n\n", media, resp);
 	}
 	public static float getAritimetica() {
 		Scanner sc = new Scanner(System.in);
+		System.out.print("\033\143");
 
 		System.out.println("Informe o total de notas: ");
 		int total = sc.nextInt();
@@ -55,6 +57,7 @@ public class metodoInvoca {
 	}
 	public static float getPonderada() {
 		Scanner sc = new Scanner(System.in);
+		System.out.print("\033\143");
 		System.out.println("Informe o total de notas: ");
 		int total = sc.nextInt();
 		double[] notas = new double[total];
@@ -70,6 +73,7 @@ public class metodoInvoca {
 	}
 	public static float getHarmonica() { 
 		Scanner sc = new Scanner(System.in);
+		System.out.print("\033\143");
 		System.out.println("Informe o total de notas: ");
 		int total = sc.nextInt();
 		double[] notas = new double[total];
