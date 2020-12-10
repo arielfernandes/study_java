@@ -1,6 +1,12 @@
 import java.util.*;
 
 public class metodoInvoca {
+	public static void clearBuffer(Scanner sc) {
+		if (sc.hasNextLine()) {
+			sc.nextLine();
+
+		}
+	}
 	public static float somar(float a, float b) {
 		float soma = (a + b);
 		return soma;
@@ -36,21 +42,23 @@ public class metodoInvoca {
 		}
 		return notas.length / aux;
 	}
-	public static void resposta(float media) {
-		System.out.print("\033\143");
-		String resp = (media >= 6) ? "Aprovado" : "Reprovado";
-		System.out.printf("\n\nMédia: %.2f\nAluno: %s.\n\n", media, resp);
-	}
 	public static float getAritimetica() {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("\033\143");
 
+		System.out.println("**********************************");
+		System.out.println("******** Média Aritimética ********");
+		System.out.println(" ***     Informe as notas     ***");
+		System.out.println("");
 		System.out.println("Informe o total de notas: ");
 		int total = sc.nextInt();
 		float[] notas = new float[total];
 		for (int i = 0; i < total; i++) {
-			System.out.println("Informe a " + (1+i) + "° nota: ");
-			notas[i] = sc.nextFloat();
+			do{
+				if(notas[i] > 10) { System.out.println("Nota " + notas[i] + " invalida!!");}
+				System.out.println("Informe a " + (i+1) + "° nota: ");
+				notas[i] = sc.nextFloat();
+			}while(notas[i] > 10);
 		}
 		float media = calcularMediaAritimetica(notas);
 		return media;
@@ -58,14 +66,21 @@ public class metodoInvoca {
 	public static float getPonderada() {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("\033\143");
+		System.out.println("**********************************"); 
+		System.out.println("********* Média Ponderada ********"); 
+		System.out.println("*** Informe a nota eo seu peso ***");
+		System.out.println("");
 		System.out.println("Informe o total de notas: ");
 		int total = sc.nextInt();
 		double[] notas = new double[total];
 		float[] peso = new float[total];
 		for (int i = 0; i < total; i++) {
-			System.out.println("Informe a " + (1+i) + "° nota: ");
-			notas[i] = sc.nextDouble();
-			System.out.println("Informe o peso da nota: ");
+			do{
+				if(notas[i] > 10) { System.out.println("Nota " + notas[i] + " invalida!!");}
+				System.out.println("Informe a " + (i+1) + "° nota: ");
+				notas[i] = sc.nextDouble();
+			}while(notas[i] > 10);
+			System.out.println("Informe o peso da nota "+(i+1)+" : ");
 			peso[i] = sc.nextFloat();
 		}
 		float media = calcularMediaPonderada(notas, peso);
@@ -74,15 +89,32 @@ public class metodoInvoca {
 	public static float getHarmonica() { 
 		Scanner sc = new Scanner(System.in);
 		System.out.print("\033\143");
+		System.out.println("******** Média Harmônica ********");
+		System.out.println(" ***    Informe as notas     ***");
+		System.out.println("");
 		System.out.println("Informe o total de notas: ");
 		int total = sc.nextInt();
 		double[] notas = new double[total];
 		for (int i = 0; i < total; i++) {
-			System.out.println("Informe a " + (i+1) + "° nota: ");
-			notas[i] = sc.nextDouble();
+			do{
+				if(notas[i] > 10) { System.out.println("Nota " + notas[i] + " invalida!!");}
+				System.out.println("Informe a " + (i+1) + "° nota: ");
+				notas[i] = sc.nextDouble();
+			}while(notas[i] > 10);
 		}
 		float media = calcularMediaHarmonica(notas);
 		return media;
+	}
+	public static void resposta(float media) {
+		Scanner sc = new Scanner(System.in);
+		System.out.print("\033\143");
+		System.out.println("**********************************");
+		System.out.println("*******      RESULTADO     *******");
+		System.out.println("");
+		String resp = (media >= 6) ? "Aprovado" : "Reprovado";
+		System.out.printf("\nMédia: %.2f\nAluno: %s.\n\n", media, resp);
+		System.out.println("Pressione ENTER para continuar!!");
+		clearBuffer(sc);
 	}
 	public static void opcoes(String op){
 		Scanner sc = new Scanner(System.in);
@@ -112,6 +144,7 @@ public class metodoInvoca {
 	}
 	public static void menu() {
 		Scanner sc = new Scanner(System.in);
+		System.out.print("\033\143");
 		System.out.println("-----------------------------------");
 		System.out.println("|         🅒🅐🅛🅒🅤🅛🅐🅡 🅜🅔🅓🅘🅐          |");
 		System.out.println("-----------------------------------");
