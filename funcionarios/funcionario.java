@@ -1,10 +1,31 @@
 import java.util.*;
 
 public class funcionario {
+
+
 	public static void clearBuffer(Scanner sc) {
 		if(sc.hasNextLine()) {
 			sc.nextLine();
 		}
+	}
+	public static boolean telaBloqueio() {
+		Scanner in = new Scanner(System.in);
+		System.out.println("\nTela de Login");
+		System.out.println("login > ");
+		String login = in.nextLine();
+		System.out.println("senha > ");
+		String senha = in.nextLine();
+		return getLogin(login, senha);
+	}
+	public static boolean getLogin(String login, String senha) {
+			if(login.equals("login") && senha.equals("1234-04")){
+				System.out.printf("Usuário %s logado com sucesso.", login);
+				return true;
+			}else{
+				System.out.print("\033\143");
+				System.out.println("Login ou senha inválidos!");
+			}
+		return false;
 	}
 	public static void menu() {
 		Scanner sc = new Scanner(System.in);
@@ -25,6 +46,11 @@ public class funcionario {
 				getInformacoes();
 				break;
 			case 2:
+				System.out.print("\033\143");
+				if(!telaBloqueio()) {
+					System.out.println("Sistema finalizado por tentativas inválidas!");
+					System.exit(0);
+				}
 				break;
 			case 3:
 				System.out.println("Volte Sempre!!!");
@@ -39,57 +65,57 @@ public class funcionario {
 		System.out.println("Informe o mês e ano de referencia:  ");
 		System.out.println("Ex:. Janeiro/2000 ");
 		String mesAno = sc.next();
-		System.out.println("Informe o sálario base: ");
-		float salarioBase = sc.nextFloat();
 		System.out.println("Informe o total de vendas: ");
-		float totalVendas = sc.nextFloat();
+		double totalVendas = sc.nextDouble();
+		System.out.println("Informe o sálario base: ");
+		double salarioBase = sc.nextDouble();
 		System.out.println("Informe número de dependentes: ");
 		int dependentes = sc.nextInt();
 
-		float comissao = calcularComissao(totalVendas);
-		float salarioBruto = calcularSalarioBruto(salarioBase, comissao);
-		float bonus = calcularBonus(totalVendas);
-		float inss = calcularINSS(salarioBruto);
-		float irpf = calcularIRPF(salarioBruto);
-		float salarioFamiliar = calcularSalarioFamiliar(dependentes, salarioBruto);
-		float salarioLiquido = calcularSalarioLiquido(salarioBruto, irpf, inss, bonus, salarioFamiliar);
+		double comissao = calcularComissao(totalVendas);
+		double salarioBruto = calcularSalarioBruto(salarioBase, comissao);
+		double bonus = calcularBonus(totalVendas);
+		double inss = calcularINSS(salarioBruto);
+		double irpf = calcularIRPF(salarioBruto);
+		double salarioFamiliar = calcularSalarioFamiliar(dependentes, salarioBruto);
+		double salarioLiquido = calcularSalarioLiquido(salarioBruto, irpf, inss, bonus, salarioFamiliar);
 
-		folhaPagamento(nome, salarioBase, totalVendas, comissao, salarioBruto, bonus, salarioFamiliar, irpf, inss, salarioLiquido, dependentes );
+		folhaPagamento(nome, (float)salarioBase, (float)totalVendas,(float)comissao, (float)salarioBruto,(float)bonus,(float)salarioFamiliar,(float)irpf, (float)inss,(float) salarioLiquido,dependentes );
 	}
-	public static float calcularComissao(float totalVendas) {
-		if(totalVendas > 50000) {
-			totalVendas *=  (2 / 100);
+	public static double calcularComissao(double totalVendas) {
+		double total = 0;
+		if(totalVendas > 150000) {
+			total = totalVendas * 0.07;
 		}else if(totalVendas > 100000) {
-			totalVendas *= ( 5 / 100);
-		}else if(totalVendas > 150000) {
-			totalVendas *= (7 / 100);
+			total = totalVendas * 0.05;
+		}else if(totalVendas > 50000) {
+			total = totalVendas * 0.02;
+		}else {
+			total = 0.0;
 		}
-		return totalVendas;
+		return total;
 	}
-	public static float calcularSalarioBruto(float salarioBase, float comissao) {
+	public static double calcularSalarioBruto(double salarioBase, double comissao) {
 		return salarioBase + comissao;
 	}
-	public static float calcularBonus(float totalVendas){
-		float bonus = 0;
+	public static double calcularBonus(double totalVendas){
+		double bonus = 0;
 		bonus = (totalVendas >= 100000)? 1000 : 0;
 		return bonus;
 	}
-	public static float calcularINSS(float salarioBruto) {
-		float inss = 0;
-		double teto = 0;
+	public static double calcularINSS(double salarioBruto) {
 		if(salarioBruto <= 965.67) {
-			inss = salarioBruto * (8/100);
+			salarioBruto =  salarioBruto * 0.08;;
 		}else if(salarioBruto <= 1609.45) {
-			inss = salarioBruto * (9/100);
+			salarioBruto =  salarioBruto * 0.09;
 		}else if(salarioBruto <= 3218.90) {
-			inss = salarioBruto * (11/100);
+			salarioBruto =  salarioBruto * 0.11;
 		}else {
-			teto = 3218.90 * (11/100);
-			inss = (float)teto;
+			salarioBruto = 3218.90 * 0.11;
 		}
-		return inss;
+		return salarioBruto;
 	}
-	public static float calcularIRPF(float salarioBruto){
+	public static double calcularIRPF(double salarioBruto){
 		double irpf = 0;
 		if(salarioBruto > 1434.59) {
 			irpf = (salarioBruto * (7.5 / 100) ) - 107.59;
@@ -102,10 +128,10 @@ public class funcionario {
 		}else {
 			irpf = 0;
 		}
-		return (float)irpf;
+		return irpf;
 	}
-	public static float calcularSalarioFamiliar(int dependentes, float salarioBruto){
-		float salarioFamilar = 0;
+	public static double calcularSalarioFamiliar(int dependentes, double salarioBruto){
+		double salarioFamilar = 0;
 		if(salarioBruto <= 10000) {
 			salarioFamilar = dependentes * 405;
 		}else if(salarioBruto <= 20000) {
@@ -115,21 +141,21 @@ public class funcionario {
 		}
 		return salarioFamilar;
 	}
-	public static float calcularSalarioLiquido(float sb, float irpf, float inss, float bonus, float sf) {
+	public static double calcularSalarioLiquido(double sb, double irpf, double inss, double bonus, double sf) {
 		return sb - irpf - inss + bonus + sf;
 	}
 
-	public static void folhaPagamento(String n, float sbase, float tv, float c, float sbruto, float b, float sf, float ir, float in, float sl, int dp) {
+	public static void folhaPagamento(String n, float sbase, float tv, float comissao, float sbruto, float b, float sf, float ir, float in, float sl, int dp) {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("\033\143");
 		System.out.printf("\n-----------------------------------\n");
 		System.out.printf("\n    **** FOLHA DE PAGAMENTO ****   \n");
 		System.out.printf("\n-----------------------------------\n");
-		System.out.printf("  Nome..................: %3s ",n);
+		System.out.printf(" Nome...................: %3s ",n);
 		System.out.printf("\n Salário Base.........: %3.2f ", sbase);
 		System.out.printf("\n Total de vendas......: %3.2f ", tv);
 		System.out.printf("\n-----------------------------------\n");
-		System.out.printf(" Comissão...............: %3.2f ", c);
+		System.out.printf(" Comissão...............: %3.2f ", comissao);
 		System.out.printf("\n Salario bruto........: %3.2f ", sbruto);
 		System.out.printf("\n------------------------------------\n");
 		System.out.printf(" Bônus..................: %3.2f ", b);
@@ -146,10 +172,17 @@ public class funcionario {
 		clearBuffer(sc);
 	}
 	public static void main(String[] args){
-
-		while(true) {
-			menu();
+		if(telaBloqueio()){
+			while(true) {menu();}
+		}else {
+			int cont = 0;
+			do{
+				telaBloqueio();
+				cont++;
+			}while(cont < 3);
+			System.out.print("\033\143");
+			System.out.printf("\n\nSistema finalizado por tentativas inválidas!\n");
 		}
 	}
-
 }
+
