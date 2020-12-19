@@ -18,13 +18,13 @@ public class funcionario {
 		return getLogin(login, senha);
 	}
 	public static boolean getLogin(String login, String senha) {
-			if(login.equals("login") && senha.equals("1234-04")){
-				System.out.printf("Usuário %s logado com sucesso.", login);
-				return true;
-			}else{
-				System.out.print("\033\143");
-				System.out.println("Login ou senha inválidos!");
-			}
+		if(login.equals("login") && senha.equals("1234-04")){
+			System.out.printf("Usuário %s logado com sucesso.", login);
+			return true;
+		}else{
+			System.out.print("\033\143");
+			System.out.println("Login ou senha inválidos!");
+		}
 		return false;
 	}
 	public static void menu() {
@@ -48,8 +48,7 @@ public class funcionario {
 			case 2:
 				System.out.print("\033\143");
 				if(!telaBloqueio()) {
-					System.out.println("Sistema finalizado por tentativas inválidas!");
-					System.exit(0);
+					checkLogin();
 				}
 				break;
 			case 3:
@@ -57,6 +56,16 @@ public class funcionario {
 				System.exit(0);
 				break;
 		}
+	}
+	public static void checkLogin(){
+		int cont = 0;
+		do{
+			telaBloqueio();
+			cont++;
+		}while(cont < 3);
+		System.out.print("\033\143");
+		System.out.printf("\n\nSistema finalizado por tentativas inválidas!\n");
+		System.exit(0);
 	}
 	public static void getInformacoes() {
 		Scanner sc = new Scanner(System.in);
@@ -79,8 +88,8 @@ public class funcionario {
 		double irpf = calcularIRPF(salarioBruto);
 		double salarioFamiliar = calcularSalarioFamiliar(dependentes, salarioBruto);
 		double salarioLiquido = calcularSalarioLiquido(salarioBruto, irpf, inss, bonus, salarioFamiliar);
-
-		folhaPagamento(nome, (float)salarioBase, (float)totalVendas,(float)comissao, (float)salarioBruto,(float)bonus,(float)salarioFamiliar,(float)irpf, (float)inss,(float) salarioLiquido,dependentes );
+		
+		folhaPagamento(nome, mesAno, (float)salarioBase, (float)totalVendas,(float)comissao, (float)salarioBruto,(float)bonus,(float)salarioFamiliar,(float)irpf, (float)inss,(float) salarioLiquido,dependentes );
 	}
 	public static double calcularComissao(double totalVendas) {
 		double total = 0;
@@ -118,13 +127,13 @@ public class funcionario {
 	public static double calcularIRPF(double salarioBruto){
 		double irpf = 0;
 		if(salarioBruto > 1434.59) {
-			irpf = (salarioBruto * (7.5 / 100) ) - 107.59;
+			irpf = (salarioBruto * 0.075) - 107.59;
 		}else if(salarioBruto > 2150.00){
-			irpf = (salarioBruto * (15 / 100) ) - 268.84;
+			irpf = (salarioBruto * 0.15) - 268.84;
 		}else if(salarioBruto > 2866.70){
-			irpf = (salarioBruto * ( 22.5 / 100)) - 483.84;
+			irpf = (salarioBruto * 0.225) - 483.84;
 		}else if(salarioBruto > 3582){
-			irpf = (salarioBruto * (27.5 / 100)) - 662.94;
+			irpf = (salarioBruto * 0.275) - 662.94;
 		}else {
 			irpf = 0;
 		}
@@ -145,24 +154,26 @@ public class funcionario {
 		return sb - irpf - inss + bonus + sf;
 	}
 
-	public static void folhaPagamento(String n, float sbase, float tv, float comissao, float sbruto, float b, float sf, float ir, float in, float sl, int dp) {
+	public static void folhaPagamento(String n, String mesAno, float sbase, float tv, float comissao, float sbruto, float b, float sf, float ir, float in, float sl, int dp) {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("\033\143");
 		System.out.printf("\n-----------------------------------\n");
 		System.out.printf("\n    **** FOLHA DE PAGAMENTO ****   \n");
 		System.out.printf("\n-----------------------------------\n");
+		System.out.printf("\n%s",mesAno);
+		System.out.printf("\n-----------------------------------\n");
 		System.out.printf(" Nome...................: %3s ",n);
-		System.out.printf("\n Salário Base.........: %3.2f ", sbase);
-		System.out.printf("\n Total de vendas......: %3.2f ", tv);
+		System.out.printf("\n Salário Base...........: %3.2f ", sbase);
+		System.out.printf("\n Total de vendas........: %3.2f ", tv);
 		System.out.printf("\n-----------------------------------\n");
 		System.out.printf(" Comissão...............: %3.2f ", comissao);
-		System.out.printf("\n Salario bruto........: %3.2f ", sbruto);
+		System.out.printf("\n Salario bruto..........: %3.2f ", sbruto);
 		System.out.printf("\n------------------------------------\n");
 		System.out.printf(" Bônus..................: %3.2f ", b);
-		System.out.printf("\n Salário família......: %3.2f ", sf);
+		System.out.printf("\n Salário família........: %3.2f ", sf);
 		System.out.printf("\n------------------------------------\n");
 		System.out.printf(" IRRF...................: %3.2f ", ir);
-		System.out.printf("\n INSS.................: %3.2f ", in);
+		System.out.printf("\n INSS...................: %3.2f ", in);
 		System.out.printf("\n------------------------------------\n");
 		System.out.printf(" Salário líquido........: %3.2f ", sl);
 		System.out.printf("\n------------------------------------\n");
@@ -175,13 +186,7 @@ public class funcionario {
 		if(telaBloqueio()){
 			while(true) {menu();}
 		}else {
-			int cont = 0;
-			do{
-				telaBloqueio();
-				cont++;
-			}while(cont < 3);
-			System.out.print("\033\143");
-			System.out.printf("\n\nSistema finalizado por tentativas inválidas!\n");
+			checkLogin();
 		}
 	}
 }
