@@ -24,8 +24,8 @@ public class funcionario {
 		}else{
 			System.out.print("\033\143");
 			System.out.println("Login ou senha inválidos!");
+			return false;
 		}
-		return false;
 	}
 	public static void menu() {
 		Scanner sc = new Scanner(System.in);
@@ -48,7 +48,18 @@ public class funcionario {
 			case 2:
 				System.out.print("\033\143");
 				if(!telaBloqueio()) {
-					checkLogin();
+					int cont = 0;
+					do{
+						if(telaBloqueio()){
+							while(true) {
+								menu();
+							}
+						}
+						cont++;
+					}while(cont < 3);
+					System.out.print("\033\143");
+					System.out.printf("\n\nSistema finalizado por tentativas inválidas!\n");
+					System.exit(0);
 				}
 				break;
 			case 3:
@@ -56,16 +67,6 @@ public class funcionario {
 				System.exit(0);
 				break;
 		}
-	}
-	public static void checkLogin(){
-		int cont = 0;
-		do{
-			telaBloqueio();
-			cont++;
-		}while(cont < 3);
-		System.out.print("\033\143");
-		System.out.printf("\n\nSistema finalizado por tentativas inválidas!\n");
-		System.exit(0);
 	}
 	public static void getInformacoes() {
 		Scanner sc = new Scanner(System.in);
@@ -88,7 +89,7 @@ public class funcionario {
 		double irpf = calcularIRPF(salarioBruto);
 		double salarioFamiliar = calcularSalarioFamiliar(dependentes, salarioBruto);
 		double salarioLiquido = calcularSalarioLiquido(salarioBruto, irpf, inss, bonus, salarioFamiliar);
-		
+
 		folhaPagamento(nome, mesAno, (float)salarioBase, (float)totalVendas,(float)comissao, (float)salarioBruto,(float)bonus,(float)salarioFamiliar,(float)irpf, (float)inss,(float) salarioLiquido,dependentes );
 	}
 	public static double calcularComissao(double totalVendas) {
@@ -183,11 +184,18 @@ public class funcionario {
 		clearBuffer(sc);
 	}
 	public static void main(String[] args){
-		if(telaBloqueio()){
-			while(true) {menu();}
-		}else {
-			checkLogin();
-		}
+		int cont = 0;
+		do{
+			if(telaBloqueio()){
+				while(true) {
+					menu();
+				}
+			}
+			cont++;
+		}while(cont < 3);
+		System.out.print("\033\143");
+		System.out.printf("\n\nSistema finalizado por tentativas inválidas!\n");
 	}
 }
+
 
