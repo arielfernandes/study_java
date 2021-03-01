@@ -1,0 +1,30 @@
+{
+    "java.project.referencedLibraries": [
+        "lib/**/*.jar",
+        "/usr/lib/jvm/java-11-openjfx/lib/javafx.base.jar",
+        "/usr/lib/jvm/java-11-openjfx/lib/javafx.controls.jar",
+        "/usr/lib/jvm/java-11-openjfx/lib/javafx.fxml.jar",
+        "/usr/lib/jvm/java-11-openjfx/lib/javafx.graphics.jar",
+        "/usr/lib/jvm/java-11-openjfx/lib/javafx.media.jar",
+        "/usr/lib/jvm/java-11-openjfx/lib/javafx.swing.jar",
+        "/usr/lib/jvm/java-11-openjfx/lib/javafx.web.jar",
+        "/usr/lib/jvm/java-11-openjfx/lib/javafx-swt.jar",
+    ],
+    "files.exclude": {
+        "**/.classpath": true,
+        "**/.project": true,
+        "**/.settings": true,
+        "**/.factorypath": true
+    },
+    "configurations": [
+        {
+            "type": "java",
+            "name": "CodeLens (Launch) - Main",
+            "request": "launch",
+            "vmArgs": "--module-path /usr/lib/jvm/java-11-openjfx/lib
+                --add-modules javafx.controls",
+            "mainClass": "App.Main",
+            "projectName": "App"
+        }
+    ]
+}
