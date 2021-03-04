@@ -1,8 +1,8 @@
 package src.entity.cliente;
 import src.entity.veiculo.*;
-import java.util.Date;
+import java.util.*;
 
-public abstract class Cliente {
+public abstract class Cliente implements ICliente{
 	private int id;
 	private String nome;
 	private String celular;
@@ -11,11 +11,21 @@ public abstract class Cliente {
 
 	public Veiculo veiculo;
 
+	private List<Veiculo>ListaVeiculo;
+
 	public void add(Veiculo veiculo) {
-		this.veiculo = veiculo;
+		if(ListaVeiculo == null) {
+			ListaVeiculo = new ArrayList<>();
+		}
+		ListaVeiculo.add(veiculo);
 	}
-	public void remove(Veiculo veiculo) {
-		this.veiculo = veiculo;
+	public List<Veiculo> getListaVeiculo() {
+		return ListaVeiculo;
+	}
+	public void setListaVeiculo(List<Veiculo> veiculo) {
+		this.ListaVeiculo = ListaVeiculo;
+	}
+	protected Cliente() {
 	}
 
 	public int getId() {
