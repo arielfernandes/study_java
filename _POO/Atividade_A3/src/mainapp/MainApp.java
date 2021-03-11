@@ -35,9 +35,9 @@ public class MainApp {
 		Marca ma1 = new Marca("BMW");
 		ma1.setId(2222);
 
-		Modelo m1 = new Modelo("Pequeno", ma1);
+		Modelo m1 = new Modelo("Algo", ma1);
 		m1.setId(22222);
-		m1.setDescricao("Carro");
+		m1.setDescricao("X20");
 
 		v1.setCor(c1);
 		v1.setModelo(m1);

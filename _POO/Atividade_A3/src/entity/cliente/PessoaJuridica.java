@@ -57,8 +57,6 @@ public class PessoaJuridica extends Cliente {
 
 
 	@Override
-	public String getDados(String Observacao) {
-		return null;
-	}
+	public String getDados(String Observacao) {	return null; }
 }
 

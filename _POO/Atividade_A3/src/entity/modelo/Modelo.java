@@ -42,5 +42,16 @@ public class Modelo {
 	public void setCategoria(ECategoria categoria) {
 		this.categoria = categoria;
 	}
+
+	@Override
+	public String toString() {
+		return "Modelo{" +
+				"id=" + id +
+				", descricao='" + descricao + '\'' +
+				", marca=" + marca +
+				", categoria=" + categoria +
+				'}';
+	}
+
 }
 

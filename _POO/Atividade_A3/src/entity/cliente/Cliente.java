@@ -25,6 +25,11 @@ public abstract class Cliente implements ICliente{
 	public void setListaVeiculo(List<Veiculo> veiculo) {
 		this.ListaVeiculo = ListaVeiculo;
 	}
+	public void remove(Veiculo veiculo) {
+		if(ListaVeiculo != null) {
+			this.ListaVeiculo.remove(veiculo);
+		}
+	}
 	protected Cliente() {
 	}
 

@@ -27,6 +27,7 @@ public class PessoaFisica extends Cliente {
 	public String getDados() {
 		SimpleDateFormat sdf = new SimpleDateFormat();
 		StringBuilder sb = new StringBuilder();
+		sb.append("Pessoa Fisica");
 		sb.append("Nome: ");
 		sb.append(getNome());
 		sb.append("\n");
@@ -43,7 +44,7 @@ public class PessoaFisica extends Cliente {
 		sb.append(sdf.format(getDataNascimento()));
 		sb.append("\n");
 		sb.append("Veiculos, Pessoa Juridica: ");
-		//sb.append(getListaVeiculos());
+		sb.append(getListaVeiculo().toString());
 		return sb.toString();
 	}
 
