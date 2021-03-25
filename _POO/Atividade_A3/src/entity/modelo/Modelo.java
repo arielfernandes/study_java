@@ -4,10 +4,10 @@ public class Modelo {
 	private int id;
 	private String descricao;
 
-	public Marca marca;
-	public ECategoria categoria;
+	private Marca marca;
+	private ECategoria categoria;
 
-	public Modelo( String descricao, Marca marca) {
+	public Modelo() {
 		this.descricao = descricao;
 		this.marca = marca;
 	}

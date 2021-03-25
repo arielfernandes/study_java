@@ -1,5 +1,7 @@
 package src.entity.veiculo;
+import src.entity.cliente.Cliente;
 import src.entity.modelo.*;
+
 public class Veiculo {
 	private int id;
 	private String placa;
@@ -9,6 +11,8 @@ public class Veiculo {
 
 	private Cor cor;
 	private Modelo modelo;
+
+	private Cliente cliente;
 
 	public Veiculo() {
 	}
@@ -57,6 +61,14 @@ public class Veiculo {
 		this.modelo = modelo;
 	}
 
+	public Cliente getCliente() {
+		return cliente;
+	}
+
+	public void setCliente(Cliente cliente) {
+		this.cliente = cliente;
+		this.cliente.add(this);
+	}
 	@Override
 	public String toString() {
 		return "Veiculo{" +
@@ -65,6 +77,7 @@ public class Veiculo {
 				", observacao='" + observacao + '\'' +
 				", cor=" + cor +
 				", modelo=" + modelo +
+				", cliente=" + cliente +
 				'}';
 	}
 
