@@ -15,6 +15,16 @@ public abstract class Cliente implements ICliente {
 
 	private List<Veiculo>ListaVeiculo = new ArrayList<>();
 
+	private Pontuacao pontuacao;
+
+	public Cliente() {
+		this.pontuacao = new Pontuacao();
+	}
+
+	public Pontuacao getPontuacao(){
+		return pontuacao;
+	}
+
 	public int getId() {
 		return id;
 	}

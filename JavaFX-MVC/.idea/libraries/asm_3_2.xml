@@ -1,0 +1,16 @@
+<component name="libraryTable">
+  <library name="asm-3.2">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/JasperBasics/jasper.reports/asm-3.2.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/JasperBasics/jasper.reports/groovy-1.7.2.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/JasperBasics/jasper.reports/iText-2.1.7.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/JasperBasics/jasper.reports/jasperreports-6.3.1.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/JasperBasics/jasper.reports/jasperreports-javaflow-6.3.1.jar!/" />
+      <root url="jar://$USER_HOME$/Downloads/JasperBasics/jasper.reports/poi-3.6-20091214.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/Downloads/JasperBasics/jasper.reports/groovy-1.7.2.jar!/" />
+    </SOURCES>
+  </library>
+</component>
